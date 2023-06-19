@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->longText('description');
+            $table->uuid('reference_id');
+            $table->timestamp('answered_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
