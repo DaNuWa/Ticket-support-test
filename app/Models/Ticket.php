@@ -14,8 +14,14 @@ class Ticket extends Model
     protected $fillable = [
         'description',
         'user_id',
+        'answered_at',
+        'answer',
         'reference_id',
     ];
+    protected $casts = [
+        'answered_at' => 'datetime',
+    ];
+
 
     public function user()
     {

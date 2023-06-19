@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->longText('description');
+            $table->longText('answer')->nullable();
             $table->uuid('reference_id');
             $table->timestamp('answered_at')->nullable();
             $table->softDeletes();
