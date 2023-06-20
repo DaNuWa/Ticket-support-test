@@ -50,7 +50,7 @@ class TicketController extends Controller
 
             //Check and creating a new user
             $user = User::firstOrCreate([
-                'email' => $request->email
+                'email' => $request->email,
             ], [
                 'name' => $request->name,
                 'contact' => $request->contact,
@@ -67,10 +67,12 @@ class TicketController extends Controller
             DB::commit();
             Mail::to($user)->send(new NewTicketCreated($ticket, $user));
             flash('Successfully Created The Ticket')->success();
+
             return to_route('status.index');
         } catch (\Exception $e) {
             DB::rollback();
             flash('Please try again')->error();
+
             return redirect()->back();
         }
     }
@@ -105,15 +107,14 @@ class TicketController extends Controller
             DB::commit();
             Mail::to($ticket->user->email)->send(new TicketAnswer($ticket));
             flash('Answer stored and sent to the user successfully')->success();
+
             return to_route('tickets.index');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             flash('Please try again')->error();
+
             return redirect()->back();
         }
 
-
     }
-
 }

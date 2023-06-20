@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(10)->create();
-        foreach (range(1,10) as $key=>$value){
-            \App\Models\User::factory(1)->create(['email'=>'supporter'.$value.'@test.com','password'=>Hash::make('password'),'is_supporter'=>true]);
+        foreach (range(1, 10) as $key => $value) {
+            \App\Models\User::factory(1)->create(['email' => 'supporter'.$value.'@test.com', 'password' => Hash::make('password'), 'is_supporter' => true]);
         }
         $this->call(TicketSeeder::class);
     }

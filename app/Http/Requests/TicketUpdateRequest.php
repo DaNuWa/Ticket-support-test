@@ -22,7 +22,7 @@ class TicketUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'answer'=>['required', 'string','max:5000'],
+            'answer' => ['required', 'string', 'max:5000'],
         ];
     }
 }

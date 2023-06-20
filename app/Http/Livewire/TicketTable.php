@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Ticket;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Ticket;
 
 class TicketTable extends DataTableComponent
 {
@@ -18,34 +18,36 @@ class TicketTable extends DataTableComponent
             ->orderBy('tickets.answered_at');
 
     }
+
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make("Description", "description")
+            Column::make('Description', 'description')
                 ->sortable(),
-            Column::make("User", "user.name")
+            Column::make('User', 'user.name')
                 ->sortable()
-            ->searchable(),
-            Column::make("Reference id", "reference_id")
+                ->searchable(),
+            Column::make('Reference id', 'reference_id')
                 ->sortable(),
-            Column::make("Answered at", "answered_at")
+            Column::make('Answered at', 'answered_at')
                 ->sortable(),
 
         ];
     }
+
     public function configure(): void
     {
         $this->setSearchEnabled();
 
         $this->setPrimaryKey('id')
-            ->setTableRowUrl(function($row) {
+            ->setTableRowUrl(function ($row) {
                 return route('tickets.edit', $row);
             });
 
         // Takes a callback that gives you the current row and its index
-        $this->setTrAttributes(function($row, $index) {
+        $this->setTrAttributes(function ($row, $index) {
             if (is_null($row->answered_at)) {
                 return [
                     'style' => 'font-weight: bold;',

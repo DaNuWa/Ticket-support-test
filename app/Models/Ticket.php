@@ -18,10 +18,10 @@ class Ticket extends Model
         'answer',
         'reference_id',
     ];
+
     protected $casts = [
         'answered_at' => 'datetime',
     ];
-
 
     public function user()
     {

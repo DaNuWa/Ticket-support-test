@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Ticket;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class TicketSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class TicketSeeder extends Seeder
             Ticket::create([
                 'description' => $faker->paragraph(2),
                 'reference_id' => $faker->uuid(),
-                'user_id' => rand(1,10),
+                'user_id' => rand(1, 10),
             ]);
         }
     }

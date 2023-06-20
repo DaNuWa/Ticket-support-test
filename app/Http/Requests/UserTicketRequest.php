@@ -22,10 +22,10 @@ class UserTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required', 'string','max:50'],
-            'email'=>['required', 'email','email:rfc,dns'],
-            'description'=>['required', 'max:5000'],
-            'contact'=>['required','numeric', 'digits:10'],
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'email', 'email:rfc,dns'],
+            'description' => ['required', 'max:5000'],
+            'contact' => ['required', 'numeric', 'digits:10'],
         ];
     }
 }

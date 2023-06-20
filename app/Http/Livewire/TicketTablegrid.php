@@ -5,10 +5,16 @@ namespace App\Http\Livewire;
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
-use PowerComponents\LivewirePowerGrid\{Button, Column, Footer, PowerGrid, PowerGridColumns, PowerGridComponent};
+use PowerComponents\LivewirePowerGrid\Button;
+use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
+use PowerComponents\LivewirePowerGrid\Footer;
+use PowerComponents\LivewirePowerGrid\PowerGrid;
+use PowerComponents\LivewirePowerGrid\PowerGridColumns;
+use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Rules\{RuleActions};
-use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 final class TicketTablegrid extends PowerGridComponent
 {
@@ -27,10 +33,10 @@ final class TicketTablegrid extends PowerGridComponent
         $this->showCheckBox();
 
         return [
-//            Exportable::make('export')
-//                ->striped()
-//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-//            Header::make()->showSearchInput(),
+            //            Exportable::make('export')
+            //                ->striped()
+            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            //            Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -96,13 +102,12 @@ final class TicketTablegrid extends PowerGridComponent
             ->addColumn('user')
             ->addColumn('reference_id')
             ->addColumn('answered_at');
-//
-//           /** Example of custom column using a closure **/
-//            ->addColumn('reference_id_lower', fn (Ticket $model) => strtolower(e($model->reference_id)))
-//
-//            ->addColumn('created_at_formatted', fn (Ticket $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+        //
+        //           /** Example of custom column using a closure **/
+        //            ->addColumn('reference_id_lower', fn (Ticket $model) => strtolower(e($model->reference_id)))
+        //
+        //            ->addColumn('created_at_formatted', fn (Ticket $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -132,9 +137,9 @@ final class TicketTablegrid extends PowerGridComponent
                 ->searchable(),
             Column::make('Answered at', 'answered_at')
                 ->sortable(),
-//
-//            Column::make('Created at', 'created_at_formatted', 'created_at')
-//                ->sortable(),
+            //
+            //            Column::make('Created at', 'created_at_formatted', 'created_at')
+            //                ->sortable(),
 
         ];
     }
@@ -149,7 +154,7 @@ final class TicketTablegrid extends PowerGridComponent
         return [
             Filter::inputText('reference_id')->operators(['contains']),
             Filter::inputText('name')->operators(['contains']),
-//            Filter::inputText('description')->operators(['contains']),
+            //            Filter::inputText('description')->operators(['contains']),
             Filter::datetimepicker('created_at'),
         ];
     }
@@ -167,22 +172,21 @@ final class TicketTablegrid extends PowerGridComponent
      *
      * @return array<int, Button>
      */
-
     public function actions(): array
     {
         return [
-//           Button::make('edit', 'Edit')
-//               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-//               ->route('tickets.edit', function(\App\Models\Ticket $model) {
-//                    return $model->id;
-//               }),
+            //           Button::make('edit', 'Edit')
+            //               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
+            //               ->route('tickets.edit', function(\App\Models\Ticket $model) {
+            //                    return $model->id;
+            //               }),
 
-//           Button::make('destroy', 'Delete')
-//               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-//               ->route('tickets.destroy', function(\App\Models\Ticket $model) {
-//                    return $model->id;
-//               })
-//               ->method('delete')
+            //           Button::make('destroy', 'Delete')
+            //               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+            //               ->route('tickets.destroy', function(\App\Models\Ticket $model) {
+            //                    return $model->id;
+            //               })
+            //               ->method('delete')
         ];
     }
 
