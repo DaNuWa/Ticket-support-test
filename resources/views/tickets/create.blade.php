@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="container">
-                    <div class="card-header container m-2">{{ __('Create a new Ticket') }}</div>
+                    @include('flash::message')
 
-                    <div class="card-body">
-                        @if (session('status'))
+                    <div class="container w-100">
+                    @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <div>
-                            <div class="col-md-8">
-                                <div class="card">
+                        <div class="col-md-8 container">
+                            <div class="card-header container m-2">{{ __('Create a new Ticket') }}</div>
+                            <div class="card">
 
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('tickets.store') }}">
@@ -30,7 +30,7 @@
                                                 <div class="col-md-6">
                                                     <input id="name" type="text"
                                                            class="form-control @error('name') is-invalid @enderror"
-                                                           name="name" value="{{ old('name') }}" >
+                                                           name="name" value="{{ old('name') }}">
 
                                                     @error('name')
                                                     <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
                                                 <div class="col-md-6">
                                                     <input id="email" type="email"
                                                            class="form-control @error('email') is-invalid @enderror"
-                                                           name="email" value="{{ old('email') }}" >
+                                                           name="email" value="{{ old('email') }}">
 
                                                     @error('email')
                                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +64,7 @@
                                                 <div class="col-md-6">
                                                     <input id="contact" type="text"
                                                            class="form-control @error('contact') is-invalid @enderror"
-                                                           name="contact" value="{{old('contact')}}"  >
+                                                           name="contact" value="{{old('contact')}}">
 
                                                     @error('contact')
                                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
                                                     <textarea
                                                         id="description"
                                                         class="form-control @error('description') is-invalid @enderror"
-                                                        name="description" required >{{old('description')}}
+                                                        name="description" required>{{old('description')}}
                                                     </textarea>
                                                     @error('description')
                                                     <span class="invalid-feedback" role="alert">
@@ -105,7 +105,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

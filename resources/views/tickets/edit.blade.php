@@ -5,6 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="container">
+                    @include('flash::message')
+
                     <div class="card-header container m-2">{{ __('Provide an answer') }}</div>
 
                     <div class="card-body">

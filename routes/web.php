@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', TicketStatusController::class)->name('status.index');
 Route::resource('tickets', TicketController::class);
+Route::get('/{id?}', TicketStatusController::class)->name('status.index');
 Auth::routes();

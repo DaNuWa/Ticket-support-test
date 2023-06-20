@@ -17,7 +17,7 @@ class TicketStatus extends Component
 
     public function mount()
     {
-        $this->reference_id = request('reference_id');
+        $this->reference_id = request('id');
     }
 
     public function checkStatus()
@@ -25,7 +25,6 @@ class TicketStatus extends Component
         $this->ticket=null;
         $this->validate();
         $this->ticket = Ticket::where('reference_id', $this->reference_id)->first();
-
     }
 
     public function render()

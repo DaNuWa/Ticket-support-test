@@ -5,18 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="container">
+                    @include('flash::message')
                     <div class="card-header container m-2">{{ __('All Tickets') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
+                    <div class="container w-100">
                         <livewire:ticket-table/>
-
                     </div>
+
                 </div>
             </div>
         </div>

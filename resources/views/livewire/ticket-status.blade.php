@@ -1,5 +1,10 @@
 <div>
-    <div class="col-md-8">
+
+
+    <div class="col-md-8 container">
+
+        <div class="card-header container m-2">{{ __('Check Ticket status') }}</div>
+
         <div class="card">
 
             <div class="card-body">
@@ -28,6 +33,7 @@
                             </button>
 
                         </div>
+
                     </div>
                 </form>
 
@@ -41,13 +47,15 @@
             <thead>
         <tr>
             <th scope="col">Question</th>
+            <th scope="col">User</th>
             <th scope="col">Answer</th>
             <th scope="col">Answered at</th>
         </tr>
         </thead>
             <tbody>
         <tr>
-            <th >{{$ticket->description}}</th>
+            <td >{{$ticket->description}}</td>
+            <td >{{$ticket->user->email}}</td>
             <td>{{$ticket->answer}}</td>
             <td>{{$ticket->answered_at->toDateTimeString()}}</td>
         </tr>

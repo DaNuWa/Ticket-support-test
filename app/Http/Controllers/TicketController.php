@@ -8,7 +8,6 @@ use App\Mail\NewTicketCreated;
 use App\Mail\TicketAnswer;
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -16,10 +15,13 @@ use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
-    public function __construct(){
-        $this->middleware(['auth','supporterOnly'])->except('create','store');
+    public function __construct()
+    {
+        //Apply Middleware protection
+        $this->middleware(['auth', 'supporterOnly'])->except('create', 'store');
 
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -57,17 +59,19 @@ class TicketController extends Controller
 
             //Creating a ticket
             $reference_id = Str::uuid();
-            $ticket=Ticket::create([
+            $ticket = Ticket::create([
                 'description' => $request->description,
                 'reference_id' => $reference_id,
                 'user_id' => $user->id,
             ]);
             DB::commit();
-            Mail::to($user)->send(new NewTicketCreated($ticket,$user));
+            Mail::to($user)->send(new NewTicketCreated($ticket, $user));
+            flash('Successfully Created The Ticket')->success();
             return to_route('status.index');
         } catch (\Exception $e) {
             DB::rollback();
-            return 'failed';
+            flash('Please try again')->error();
+            return redirect()->back();
         }
     }
 
@@ -93,11 +97,21 @@ class TicketController extends Controller
      */
     public function update(TicketUpdateRequest $request, Ticket $ticket)
     {
-        $this->middleware(['auth','supporterOnly']);
-        $ticket->load('user');
-        $ticket->update($request->validated()+['answered_at'=>now()]);
-        Mail::to($ticket->user->email)->send(new TicketAnswer($ticket));
-        return to_route('tickets.index');
+        DB::beginTransaction();
+
+        try {
+            $ticket->load('user');
+            $ticket->update($request->validated() + ['answered_at' => now()]);
+            DB::commit();
+            Mail::to($ticket->user->email)->send(new TicketAnswer($ticket));
+            flash('Answer stored and sent to the user successfully')->success();
+            return to_route('tickets.index');
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            flash('Please try again')->error();
+            return redirect()->back();
+        }
 
 
     }
