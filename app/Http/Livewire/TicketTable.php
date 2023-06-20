@@ -8,14 +8,14 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class TicketTable extends DataTableComponent
 {
-    protected $model = Ticket::class;
+//    protected $model = Ticket::class;
 
-    public function query()
+    public function builder(): \Illuminate\Database\Eloquent\Builder
     {
         return Ticket::query()
             ->join('users', 'users.id', '=', 'tickets.user_id')
             ->select('tickets.description', 'tickets.id', 'tickets.answered_at', 'tickets.user_id', 'tickets.reference_id', 'users.name as name')
-            ->orderBy('tickets.answered_at');
+            ->latest('tickets.created_at');
 
     }
 
@@ -23,22 +23,23 @@ class TicketTable extends DataTableComponent
     {
         return [
             Column::make('Id', 'id')
-                ->sortable(),
+            ,
             Column::make('Description', 'description')
-                ->sortable(),
+            ,
             Column::make('User', 'user.name')
-                ->sortable()
                 ->searchable(),
             Column::make('Reference id', 'reference_id')
-                ->sortable(),
+                ->searchable(),
             Column::make('Answered at', 'answered_at')
-                ->sortable(),
+            ,
 
         ];
     }
 
     public function configure(): void
     {
+        $this->setSortingStatus(false);
+
         $this->setSearchEnabled();
 
         $this->setPrimaryKey('id')

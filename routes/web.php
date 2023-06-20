@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('tickets', TicketController::class);
-Route::get('/{id?}', TicketStatusController::class)->name('status.index');
 Auth::routes();
+Route::get('/{id?}', TicketStatusController::class)->name('status.index');

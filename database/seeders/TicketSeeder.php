@@ -15,7 +15,7 @@ class TicketSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Ticket::create([
                 'description' => $faker->paragraph(2),
                 'reference_id' => $faker->uuid(),

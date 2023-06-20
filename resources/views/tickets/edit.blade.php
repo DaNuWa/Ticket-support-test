@@ -18,9 +18,9 @@
 
                         <div>
                             <div class="col-md-8">
-                                <div class="card">
+                                <div class=" container ">
 
-                                    <div class="card-body">
+                                    <div class="card-body container w-100">
                                         <form method="POST" action="{{ route('tickets.update',$ticket) }}">
                                             @csrf
                                             @method('patch')
